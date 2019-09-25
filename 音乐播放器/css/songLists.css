@@ -1,0 +1,157 @@
+body{
+    margin: 0 auto;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.clearfix{
+    overflow: hidden;
+}
+html,body, .Appcontent{
+    height: 100%;
+}
+ul{
+    list-style: none;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.auto-img{
+    width: 100%;
+    display: block;
+}
+.Appcontent{
+    height: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0 auto;
+    background-image: url("../img/back3.jpg") ;
+    background-size: cover;
+    display: none;
+}
+.appUrl{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.LoadBtn{
+    width: 9rem;
+    height: 2rem;
+    line-height: 2rem;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid #fff;
+    border-radius: 20px;
+}
+.Appcontent-icon{
+    width: 100%;
+    height: .8rem;
+    margin: 0 auto;
+    background-image: linear-gradient(to bottom, #fff 0%, #fff 100%);
+}
+.Appcontent-icon>div{
+    float: left;
+}
+.icon1{
+    height: .4rem;
+    margin: .1rem 0;
+}
+.musicListtitle{
+    width: calc(100% - 40px);
+    font-weight: bolder;
+    font-size: .5rem;
+    text-align: center;
+}
+a{
+    color: #fff;
+ text-decoration: none;
+}
+.Appcontent .appUrl{
+    height: calc(100% - 4rem - 32px);
+}
+.Appcontent ul{
+  height: 100%;
+  overflow-y: auto;
+}
+.Appcontent ul::-webkit-scrollbar { 
+    width: 0px;
+}
+.Appcontent ul::-webkit-scrollbar-thumb {
+    border-radius: 1px;
+    background: rgba(0, 0, 0, 0.4);
+}
+.Appcontent ul::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.description{
+    width: 100%;
+    height: calc(2.5rem + .2rem);
+    margin: 0 auto;
+    border-bottom: 1px solid #000;
+}
+.songListImg{
+     width: 2.5rem;
+     height: 2.5rem;
+     margin: .1rem;
+}
+.descriptionContent{
+    width: calc(100% - 2.7rem);
+    font-size: 16px;
+}
+.descriptionContent>div{
+    height: calc((2.7rem) / 3);
+    width: 100%;
+    line-height: calc((2.7rem) / 3);
+    color: #fff;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.Dsonglist>li{
+    color: #fff;
+    border-bottom:1px solid #b2b2b2;; 
+    position: relative;
+    font-size: 16px;
+}
+.Dsonglist>li>div{
+     float: left;
+}
+.headImg{
+    width: 1rem;
+    height: 1rem;
+    margin: .1rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.songlistName{
+    height: 1.2rem;
+    padding-top: 5px;
+}
+.DsonglName{
+    width: 5.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.songListplayTip{
+     float: right !important;
+     position: absolute;
+     top: 50%;
+     right: .1rem;
+     transform: translateY(-50%);
+     
+}
+.songListplayTip>i{
+    display: block;
+    float: left;
+    height: 20px;
+    margin-right: 5px;
+    border: 1.5px solid #ddd;
+}

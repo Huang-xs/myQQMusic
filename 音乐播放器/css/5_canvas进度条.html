@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 400px;
+            margin: 100px auto 0;
+            background-color: #ddd;
+        }
+        .box>canvas{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="box">
+        <canvas id="canvas" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var canvas = document.getElementById('canvas');
+
+            var context = canvas.getContext('2d');
+
+            //获取canvas的宽度和高度
+            var cw = canvas.width;
+            var ch = canvas.height;
+
+            //绘制大圆的半径
+            var r = 100;
+
+            //小圆半径
+            var smallR = 10;
+
+            //进度达到68%
+
+            // 递增角度
+            var n = 0;
+
+            //初始角度
+            var initDeg = 120;
+
+            //最大角度增加
+            var maxDeg = 300;
+
+            //进度百分比
+            var percent = 0.86;
+
+            // 角度递增时间
+            var duration = 15;
+
+            function drawProgress() {
+                //绘制大圆
+                context.beginPath();
+                context.lineWidth = 5;
+                context.strokeStyle = '#e4393c';
+                context.arc(cw / 2, ch / 2, r, initDeg / 180 * Math.PI, (initDeg + n) / 180 * Math.PI, false);
+                context.stroke();
+                context.closePath();
+
+                context.beginPath();
+                context.fillStyle = '#007BDB';
+                context.arc(cw / 2, ch / 2, r - 2.5, 0, 360 / 180 * Math.PI, false);
+                context.fill();
+                context.closePath();
+
+                //绘制固定小圆
+                context.beginPath();
+                context.fillStyle = '#FF9800';
+                context.arc(cw / 2 + Math.cos(initDeg / 180 * Math.PI) * r, ch / 2 + Math.sin(initDeg / 180 * Math.PI) * r , smallR, 0, 360 / 180 * Math.PI, false);
+                context.fill();
+                context.closePath();
+
+                //绘制动态小圆
+                context.beginPath();
+                context.fillStyle = '#F0b8f0';
+                context.arc(cw / 2 + Math.cos((initDeg + n) / 180 * Math.PI) * r, ch / 2 + Math.sin((initDeg + n) / 180 * Math.PI) * r , smallR, 0, 360 / 180 * Math.PI, false);
+                context.fill();
+                context.closePath();
+
+                //绘制文字
+                context.beginPath();
+                context.font = '32px 微软雅黑';
+                context.fillStyle = '#fff';
+                context.textAlign = 'center';
+                context.fillText(Math.floor(n / maxDeg * 100) + '%', cw / 2, ch / 2 +16);
+                context.closePath();
+                
+        }
+
+        drawProgress();
+
+        var timer = setInterval(function () {
+            n++;
+            if (n > maxDeg * percent) {
+                clearInterval(timer);
+                timer = null;
+            } else {
+                //清除画布图形
+                context.clearRect(0, 0, cw, ch);
+
+                //绘制图形
+                drawProgress();
+            }
+            
+        }, duration)
+
+    }
+    </script>
+</body>
+</html>

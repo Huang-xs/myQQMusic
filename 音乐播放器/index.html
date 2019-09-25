@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>音乐播放器首页</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/songLists.css">
+    <link rel="stylesheet" href="./css/Bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/Bootstrap/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/iconfont/iconfont.css">
+</head>
+
+<!--
+    bootstrap的list-unstyled类名：去掉ul的圆点 
+-->
+
+<body>
+    <div class="main">
+        <!-- pc ipad -->
+        <header>
+            <div class="head-content">
+                <div class="nav-content">
+                    <ul class="list-unstyled nav-list">
+                        <li class="logo"></li>
+                        <li>发现音乐<i class="arrow"></i></li>
+                        <li>我的音乐</li>
+                        <li>朋友</li>
+                        <li>商城</li>
+                        <li>音乐人</li>
+                        <li>下载客户端</li>
+                        <li class="se">
+                            <input type="text" class="search" placeholder="音乐/视频/电台/用户" id="">
+                            <i class="fa fa-search searchIcon"></i>
+                        </li>
+                        <li>注册</li>
+                        <li>登录</li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <div class="subentry">
+            <div class="subentry-box">
+                <ul class="list-unstyled">
+                    <li><i class="active">推荐</i></li>
+                    <li>排行榜</li>
+                    <li>歌单</li>
+                    <li>主播电台</li>
+                    <li>歌手</li>
+                    <li>新碟上架</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- mobile -->
+        <div class="mobile">
+            <header>
+                <div class="head-m-content">
+                    <div class="head-m-content-box float-left">
+                        <i class="one"></i>
+                        <i class="two"></i>
+                        <i class="three"></i>
+                    </div>
+                    <div class="m-logo">
+                        <img src="./img/logo.png" class="auto-img" alt="">
+                    </div>
+                    <i class="fa fa-user-circle-o userIcon"></i>
+                </div>
+
+                <!-- 导航条 -->
+                <div class="navcontent">
+                    <ul class="navList">
+                        <li class="active">歌单</li>
+                        <li class="">MV</li>
+                        <li class="">专辑</li>
+                        <li class="">歌手</li>
+                        <li class="">排行</li>
+                        <li class="">电台</li>
+                    </ul>
+                </div>
+            </header>
+            <!-- 默认为歌单：歌单分类，歌单列表，歌单详情，推荐歌曲列表，歌曲详情 -->
+            <section>
+                <div class="songList">
+                    <div class="songListcontent clearfix">
+                        <div class="lefticon float-left">
+                            <img src="./img/line.png" class="auto-img">
+
+
+                        </div>
+                        <div class="songListTitle float-left">全部</div>
+                        <div class="selectclass float-left">
+                            <button class="selectBtn">选择分类</button>
+                        </div>
+                        <div class="float-right new">最新</div>
+                    </div>
+                    <div class="musicList">
+                        <ul class="list-unstyled list">
+
+                        </ul>
+                    </div>
+                    <div class="app clearfix">
+                        <div class="loadImg float-left">
+                            <img src="./img/logo.png" class="auto-img" alt="">
+                        </div>
+                        <div class="float-right loadBtn" id="loadBtn">下载客户端APP</div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 歌单详情页 -->
+            <div class="Appcontent">
+                <div class="Appcontent-icon">
+                    <div class="icon1" id="icon1">
+                        <img src="./img/left.png" class="auto-img">
+                    </div>
+                    <div class="musicListtitle">
+                        <div class="DmusicList">歌单详情</div>
+                    </div>
+                </div>
+                <div class="appUrl">
+                    <div class="description clearfix">
+                        <!-- <div class="songListImg fl">
+                            <img src="http://p2.music.126.net/viW2R3HFFDLDiUIx50Dm8A==/109951163855234137.jpg" alt=""
+                                class="auto-img">
+                        </div>
+                        <div class="descriptionContent fl">
+                            <div class="songName">歌单名：DJ中文歌曲、咚鼓版</div>
+                            <div class="descriptionInfo">描述：无</div>
+                            <div class="songCTime">时间：1566025281049</div>
+                        </div> -->
+                    </div>
+                    <ul class="Dsonglist">
+                       
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 手机端的底部固定 -->
+            <footer>
+                <div class="time">
+                    <div class="currentTime float-left" id="currentTime">00:00</div>
+                    <div class="duration float-right" id="duration">00:00</div>
+                </div>
+                <audio src="https://music.163.com/song/media/outer/url?id=1348066360" class="audio" id="audio"
+                    preload></audio>
+                <!-- 底部播放栏 -->
+                <div class="tabs">
+                    <!-- 歌手头像 -->
+                    <div class="circle">
+                        <img src="" class="auto-img headImage" alt="">
+                    </div>
+
+                    <!-- 进度条 -->
+                    <div class="bar">
+                        <!-- 激活层 -->
+                        <div class="progress-active"></div>
+                        <!-- 滑块 -->
+                        <div class="mask"></div>
+                        <!-- 事件层 -->
+                        <div class="layer"></div>
+                    </div>
+
+                    <!-- 当前在播放的音乐名称 -->
+                    <div class="musicIcon">
+                        <div class="music">
+                            <div class="title" title="当前在播放的音乐">当前在播放的音乐</div>
+                            <div class="author">实打实</div>
+                        </div>
+
+                        <div class="icon">
+                            <div class="i">
+                                <img src="./img/i1.png" alt="图片" class="auto-img">
+                            </div>
+                            <div id="playBtn">
+                                <img src="./img/i2.png" class="auto-img" alt="图片">
+                            </div>
+                            <div class="i">
+                                <img src="./img/i3.png" class="auto-img" alt="图片"></div>
+                        </div>
+                        <div class="only">
+                            <div class="o1" title="单曲循环">
+                                <img src="./img/only.png" class="auto-img">
+                            </div>
+                            <div class="o2">
+                                <img src="./img/align.png" class="auto-img">
+                            </div>
+                            <div class="o3">
+                                <img src="./img/suiji.png" class="auto-img">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 单曲循环 -->
+                </div>
+            </footer>
+
+
+        </div>
+    </div>
+
+    <script src="./js/jquery/jquery-3.4.1.min.js"></script>
+    <script src="./js/Bootstrap/bootstrap.min.js"></script>
+    <script src="./js/Bootstrap/popper.min.js"></script>
+    <script src="./js/Api.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/rem.js"></script>
+    <script>
+        window.onload = function () {
+            rem.init();
+            Ajax.init();
+
+            // 获取滑块的宽度
+            var $mask = $(".mask");
+            var maskwidth = $mask.width();
+
+            //获取未激活进度条宽度
+            var barsWidth = $('.bar').width();
+
+            // 滑块的滑动范围
+            var minLeft = 0;
+            var maxLeft = barsWidth - maskwidth;
+
+            // 存储事件层元素
+            var $layer = $(".layer");
+
+            function move(e) {
+
+                console.log("$layer==>", $layer.width());
+
+                // 触碰屏幕的x坐标
+                var x = e.targetTouches[0].pageX;
+                console.log(x);
+
+
+                // 获取当前元素距离左边的距离
+                var offsetLeft = $(this).offset().left;
+
+                var left = x - offsetLeft - maskwidth / 2;
+
+                left = left >= maxLeft ? maxLeft : left <= minLeft ? minLeft : left;
+
+                console.log("left==>", left);
+
+                $mask.css({
+                    left: left + "px"
+                });
+                // 激活进度条
+
+                var activeWidth = x - offsetLeft;
+                activeWidth = activeWidth >= barsWidth ? barsWidth : activeWidth <= 0 ? 0 : activeWidth;
+                $(".progress-active").css({
+                    width: activeWidth + "px"
+                })
+            }
+
+            var isChange = false;
+
+            // 时间补0
+            function addZero(val) {
+                return val = val < 10 ? "0" + val : val;
+            }
+            // 处理时间
+            function dealTime(time) {
+                var second = addZero(Math.floor(time / 1000 % 60));
+                var minute = addZero(Math.floor(time / 1000 / 60));
+                return minute + ":" + second;
+            }
+
+            $layer.on("touchstart", function (e) {
+                move.call(this, e);
+                isChange = true;
+            })
+
+            $layer.on("touchmove", function (e) {
+                move.call(this, e);
+
+                // 播放时拉动滑块
+
+                var percent = $mask.position().left / maxLeft;
+                var left = percent * duration * 1000;
+
+                $("#currentTime").text(dealTime(left));
+            })
+
+            $layer.on("touchend", function (e) {
+                var percent = $mask.position().left / maxLeft;
+
+                $("#audio")[0].currentTime = percent * duration;
+
+
+                isChange = false;
+            })
+
+            var duration = 0;
+
+
+            // 总时间
+            $("#audio")[0].oncanplay = function () {
+                duration = this.duration;
+
+                // console.log(this.duration);
+
+                $("#duration").text(dealTime(this.duration * 1000));
+            }
+
+            //监听音频实时变化
+            // 当前时间
+            $("#audio")[0].ontimeupdate = function () {
+                if (!isChange) {
+
+                    // 设置进度条上的当前时间
+                    $("#currentTime").text(dealTime(this.currentTime * 1000));
+
+                    // 设置进度条的实时变化的百分比
+                    var percent = this.currentTime / duration;
+
+                    // console.log(percent);
+
+                    // 滑块的实时变化
+                    $mask.css({
+                        left: percent * maxLeft + "px"
+                    })
+
+                    // 激活进度层的宽度
+                    $(".progress-active").css({
+                        width: percent * maxLeft + maskwidth / 2 + "px"
+                    })
+                    console.log($mask.position().left);
+
+                }
+            }
+
+            // 播放完成
+            $("#audio")[0].onended = function () {
+                $("#playBtn>img").attr("src", "./img/i2.png")
+            }
+            //详情
+            var songObj = {};
+            var songArr = [];
+            var songListDetail = localStorage.Detail;
+            songListDetail = songListDetail == undefined ? songObj : songListDetail;
+            $(".list>li>.more").on("click", function () {
+                var id = this.dataset.id;
+
+                console.log("获取歌单详情=>", id);
+
+                $.ajax({
+                    type: "get",
+                    isAsync: "true",
+                    url: "http://localhost/playlist/detail?id=" + id,
+                    success: function (data) {
+                        console.log(data);
+
+                        //    渲染歌单描述
+                        var str = `<div class="songListImg fl">
+                            <img src="${data.playlist.coverImgUrl}" alt="" class="auto-img">
+                            </div>
+                            <div class="descriptionContent fl">
+                                <div class="songName">歌单名：${data.playlist.name}</div>
+                                <div class="descriptionInfo">描述：${data.playlist.description == null ? "无" : data.playlist.description}</div>
+                                <div class="songCTime">时间：${data.playlist.createTime}</div>
+                                </div>`;
+
+                        $(".description").html(str);
+
+                        // 渲染歌单音乐列表
+                        var frame = document.createDocumentFragment();
+                        for (var i = 0; i < data.playlist.tracks.length; i++) {
+
+                            var li = document.createElement("li");
+                            li.className = "clearfix";
+
+                            var liStr = `<div class="headImg">
+                                <img src="${data.playlist.tracks[i].al.picUrl}"
+                                    alt="" class="auto-img">
+                            </div>
+                            <div class="songlistName">
+                                <div class="DsonglName"> ${data.playlist.tracks[i].name}</div>
+                                <div class="songListTime">${data.playlist.tracks[i].dt}</div>
+                            </div>
+                            <div class="songListplayTip clearfix">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>`;
+                            li.innerHTML = liStr;
+                            frame.append(li)
+                        }
+                            $(".Dsonglist").append(frame)
+                        $(".Appcontent").slideDown();
+                    }
+                })
+            })
+
+
+            // 详情页返回按钮
+            $("#icon1").on("click", function () {
+                $(".Appcontent").slideToggle();
+            })
+        }
+    </script>
+</body>
+
+</html>
