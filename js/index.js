@@ -1,17 +1,16 @@
 function Ajax() { }
 
 Ajax.prototype.init = function () {
-    // 设置歌曲当前播放时间和歌曲总时间
 
-
-    // 开始截取的下标
-    var startindex = 0;
-
-    // 结束截取的下标
-    var endindex = 20;
-
-
-
+// 处理日期格式
+function dealDate(getTime){
+    var second = new Date(getTime);
+    return addZero(second.getFullYear())+"-"+addZero(second.getMonth()+1)+"-"+addZero(second.getDate())
+}
+// 时间补0
+function addZero(val) {
+    return val = val < 10 ? "0" + val : val;
+}
 
     // 获取元素
     function getId(selector) {
@@ -38,7 +37,7 @@ Ajax.prototype.init = function () {
         </div>
         <div class="musicName float-left">
             <div class="name">${local.playlists[i].name}</div>
-            <div class="aut">${local.playlists[i].updateTime}</div>
+            <div class="aut">${dealDate(local.playlists[i].updateTime)}</div>
         </div>
         <div class="more" data-id = "${local.playlists[i].id}">
             详情
@@ -80,10 +79,6 @@ Ajax.prototype.init = function () {
         })
     }
 
-    // 下载按钮得点击事件
-    // getId("loadBtn").onclick = function () {
-    //     location.href = "./songLists.html";
-    // }
 
     // 播放按钮的选择器
     var playBtn = getId("playBtn").children[0];
@@ -102,54 +97,15 @@ Ajax.prototype.init = function () {
             playBtn.removeAttribute("src");
             playBtn.setAttribute("src", "./img/play.png");
             isPlay = false;
-
         } else {
             pauseBtn.pause();
             playBtn.setAttribute("src", "./img/i2.png");
             isPlay = true;
-
         }
     }
 
-    // $.ajax({
-    //         url: "http://localhost/user/playlist?uid=141998290",
-    //         type: "post",
-    //         // dataType: "jsonp",
-    //         data: {},
-    //         isAsync: "true",
-    //         success: function(data) {
-    //             console.log(data);
-
-    //             // 每次截取的10条数据
-    //             var cutData = data.Body.slice(startindex, endindex);
-    //             console.log(cutData);
 
 
-    //             // 初始化播放器
-    //             $(".headImage").attr("src", data.Body[0].pic);
-    //             $(".title").text(data.Body[0].title)
-    //             $(".author").text(data.Body[0].author)
-
-    //             $(".icon2").on("click", function() {
-    //                 console.log($(".audio"));
-    //             })
-    //             var url = data.Body[0].url;
-    //             console.log(url.split("=")[1].split("&")[0]);
-
-    //             // $.post({
-    //             //     dataType: "jsonp",
-    //             //     url: "http://music.163.com/song/media/outer/url",
-    //             //     isAsync: "true",
-    //             //     data: {
-    //             //         id: url.split("=")[1].split("&")[0]
-    //             //     },
-    //             //     success: function(data) {
-    //             //         console.log(data);
-    //             //         // $(".audio").attr("src", data);
-    //             //     },
-    //             // })
-    // }
-    // })
 
 }
 

@@ -124,19 +124,10 @@
                 </div>
                 <div class="appUrl">
                     <div class="description clearfix">
-                        <!-- <div class="songListImg fl">
-                            <img src="http://p2.music.126.net/viW2R3HFFDLDiUIx50Dm8A==/109951163855234137.jpg" alt=""
-                                class="auto-img">
-                        </div>
-                        <div class="descriptionContent fl">
-                            <div class="songName">歌单名：DJ中文歌曲、咚鼓版</div>
-                            <div class="descriptionInfo">描述：无</div>
-                            <div class="songCTime">时间：1566025281049</div>
-                        </div> -->
                     </div>
-                    <ul class="Dsonglist">
-                       
-                        
+                    <ul class="Dsonglist" id="Dsonglist">
+
+
                     </ul>
                 </div>
             </div>
@@ -214,6 +205,12 @@
             rem.init();
             Ajax.init();
 
+            // 开始截取的下标
+            var startindex = 0;
+
+            // 结束截取的下标
+            var endindex = 15;
+
             // 获取滑块的宽度
             var $mask = $(".mask");
             var maskwidth = $mask.width();
@@ -271,6 +268,13 @@
                 return minute + ":" + second;
             }
 
+            // 处理日期格式
+            function dealDate(getTime) {
+                var second = new Date(getTime);
+                return addZero(second.getFullYear()) + "-" + addZero(second.getMonth() + 1) + "-" + addZero(second.getDate())
+            }
+
+
             $layer.on("touchstart", function (e) {
                 move.call(this, e);
                 isChange = true;
@@ -319,7 +323,6 @@
                     // 设置进度条的实时变化的百分比
                     var percent = this.currentTime / duration;
 
-                    // console.log(percent);
 
                     // 滑块的实时变化
                     $mask.css({
@@ -344,6 +347,10 @@
             var songArr = [];
             var songListDetail = localStorage.Detail;
             songListDetail = songListDetail == undefined ? songObj : songListDetail;
+
+            // 获取所有的li
+            var getLi = 0;
+
             $(".list>li>.more").on("click", function () {
                 var id = this.dataset.id;
 
@@ -354,7 +361,6 @@
                     isAsync: "true",
                     url: "http://localhost/playlist/detail?id=" + id,
                     success: function (data) {
-                        console.log(data);
 
                         //    渲染歌单描述
                         var str = `<div class="songListImg fl">
@@ -363,46 +369,60 @@
                             <div class="descriptionContent fl">
                                 <div class="songName">歌单名：${data.playlist.name}</div>
                                 <div class="descriptionInfo">描述：${data.playlist.description == null ? "无" : data.playlist.description}</div>
-                                <div class="songCTime">时间：${data.playlist.createTime}</div>
+                                <div class="songCTime">时间：${dealDate(data.playlist.createTime)}</div>
                                 </div>`;
 
                         $(".description").html(str);
 
                         // 渲染歌单音乐列表
+
+                        var musicListNum = data.playlist.tracks.slice(startindex, endindex);
+
+
                         var frame = document.createDocumentFragment();
-                        for (var i = 0; i < data.playlist.tracks.length; i++) {
+                        for (var i = 0; i < musicListNum.length; i++) {
 
                             var li = document.createElement("li");
-                            li.className = "clearfix";
-
+                            li.className = "clearfix active";
                             var liStr = `<div class="headImg">
-                                <img src="${data.playlist.tracks[i].al.picUrl}"
+                                <img src="${musicListNum[i].al.picUrl}"
                                     alt="" class="auto-img">
                             </div>
                             <div class="songlistName">
-                                <div class="DsonglName"> ${data.playlist.tracks[i].name}</div>
-                                <div class="songListTime">${data.playlist.tracks[i].dt}</div>
+                                <div class="DsonglName"> ${musicListNum[i].name}</div>
+                                <div class="songListTime">${dealTime(musicListNum[i].dt)}</div>
                             </div>
                             <div class="songListplayTip clearfix">
-                                <i></i>
-                                <i></i>
-                                <i></i>
-                                <i></i>
+                                <i class="i1"></i>
+                                <i class="i2"></i>
+                                <i class="i3"></i>
+                                <i class="i4"></i>
                             </div>`;
                             li.innerHTML = liStr;
                             frame.append(li)
                         }
-                            $(".Dsonglist").append(frame)
+                        $(".Dsonglist").append(frame)
+
+                        // getLi = $("#Dsonglist>li");
                         $(".Appcontent").slideDown();
+                        
                     }
                 })
+                //    歌曲列表的点击事件
+                setTimeout(function(){
+                    console.log($("#Dsonglist>li"));
+                },1000)
             })
+            
+
+            // 歌单列表懒加载
 
 
             // 详情页返回按钮
             $("#icon1").on("click", function () {
                 $(".Appcontent").slideToggle();
             })
+
         }
     </script>
 </body>
