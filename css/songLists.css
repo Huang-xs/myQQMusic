@@ -127,7 +127,11 @@ a{
      top: 50%;
      right: .1rem;
      transform: translateY(-50%);
-     
+}
+.downLoadIcon{
+    width: .44rem;
+    height: .44rem;
+   margin-left: 1.5rem;
 }
 .songListplayTip>i{
     display: block;

@@ -1,4 +1,7 @@
-@import "./reset.css";
+@import "../css/reset.css";
+html,body,.container{
+  height: 100%;
+}
 body{
     margin: 0 auto;
     font-size: 16px;
@@ -16,14 +19,95 @@ body{
 .containHead{
    width: 100%;
    height: 1rem;
-   background-color: #b2b2b2;
+   padding: .05rem .1rem;
 }
-.songPrev{
-  
+.songIcon{
+  width: .64rem;
+  height: .64rem;
+  margin: calc((1rem - .64rem)/2)  0;
 }
 .songTitle{
-
+    width: calc(100% - (.64rem * 2) - .2rem);
+  height: .64rem;
+  margin: calc((1rem - .64rem)/2)  0;
+  text-align: center;
+  line-height: .64rem;
+  font-weight: bolder;
+color: #fff;
+font-size: .48rem;
 }
-.songDownLoad{
-
+.mainContent{
+  width: 100%;
+  height: calc(100% - 1.1rem - 3.5rem);
+  margin-top: 40px;
+  /* background-color: #b2b2b2; */
+  /* display: none; */
+}
+/* .showWord{
+  height: 100%;
+  overflow-y: auto;
+} */
+.a{
+  height: 1000px;
+}
+.footContent{
+  width: 100%;
+  height: 3.5rem;
+  position: absolute;
+  bottom: 0;
+}
+.time{
+  width: 100%;
+  color: #fff;
+}
+.currentTime{
+  margin-left: .25rem;
+}
+.durationTime{
+  margin-right: .25rem;
+}
+.progress{
+  position: relative;
+  width: 100%;
+  height: .06rem;
+  background-color: #fff;
+}
+.progress-active{
+  background-color: rgb(23, 241, 241);
+  width: 20px;
+  height: .06rem;
+}
+.mask{
+  position: absolute; 
+  top: -.03rem;
+   left: 10px;
+  width: .2rem;
+  height: .12rem;
+  background-color: blue;
+}
+.layer{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: .06rem;
+}
+.tip{
+  margin-top: .15rem;
+  width: calc(100% - .5rem);
+  height: 1rem;
+  padding: .05rem .25rem;
+   line-height: 1rem;
+   color: #fff;
+   font-size: .45rem;
+   font-weight: bolder;
+}
+.enjoy{
+  width: .64rem;
+  height: .64rem;
+  margin: calc(1rem - .74rem - .11rem) 0;
+}
+.playIcon{
+  width: 100%;
+  height: 100%;
+  background-color: #b2b2b2;
 }

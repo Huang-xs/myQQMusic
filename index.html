@@ -390,8 +390,14 @@
                             </div>
                             <div class="songlistName">
                                 <div class="DsonglName"> ${musicListNum[i].name}</div>
-                                <div class="songListTime">${dealTime(musicListNum[i].dt)}</div>
+                                <div class="songListTime clearfix">
+                                    <div class="fl">${dealTime(musicListNum[i].dt)}</div>
+                                    <div class="downLoadIcon fl">
+                                        <img src="./img/downLoad.png" class="auto-img" alt="" srcset="">
+                                    </div>
+                                    </div>
                             </div>
+                            
                             <div class="songListplayTip clearfix">
                                 <i class="i1"></i>
                                 <i class="i2"></i>
@@ -405,15 +411,15 @@
 
                         // getLi = $("#Dsonglist>li");
                         $(".Appcontent").slideDown();
-                        
+
                     }
                 })
                 //    歌曲列表的点击事件
-                setTimeout(function(){
+                setTimeout(function () {
                     console.log($("#Dsonglist>li"));
-                },1000)
+                }, 1000)
             })
-            
+
 
             // 歌单列表懒加载
 

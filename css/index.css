@@ -389,7 +389,7 @@ body,
         bottom:1rem;
         left: 0;
         height: .3rem;
-        background-color: #ddd;
+        background-color: rgba(238, 237, 237,.8);
         font-size: 12px;
     }
     .currentTime{
@@ -400,8 +400,6 @@ body,
         margin-right: .20rem;
         margin-top: -5px;
     }
-    
-    
 }
 /* @media screen and (min-width: 1200px){
 }
