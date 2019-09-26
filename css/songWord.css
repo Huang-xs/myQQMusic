@@ -13,7 +13,7 @@ body{
   bottom: 0;
   right: 0;
   margin: auto;
-  background: url("../img/back2.jpg");
+  background: url("../img/back1.jpg");
   background-size: cover;
 }
 .containHead{
@@ -36,19 +36,34 @@ body{
 color: #fff;
 font-size: .48rem;
 }
+.moveImg{
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid #000;
+  border-radius: 50%;
+  margin: .2rem auto;
+
+}
 .mainContent{
   width: 100%;
-  height: calc(100% - 1.1rem - 3.5rem);
-  margin-top: 40px;
-  /* background-color: #b2b2b2; */
-  /* display: none; */
+  height: calc(100% - 1.1rem - 3.5rem - 3.4rem);
 }
-/* .showWord{
+.showWord{
   height: 100%;
   overflow-y: auto;
-} */
-.a{
-  height: 1000px;
+  text-align: center;
+}
+
+.showWord::-webkit-scrollbar { 
+  width: 0px;
+}
+.showWord::-webkit-scrollbar-thumb {
+  border-radius: 1px;
+  background: rgba(0, 0, 0, 0.4);
+}
+.showWord::-webkit-scrollbar-track {
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.2);
 }
 .footContent{
   width: 100%;
@@ -107,7 +122,26 @@ font-size: .48rem;
   margin: calc(1rem - .74rem - .11rem) 0;
 }
 .playIcon{
-  width: 100%;
+  width: calc(100% - .5rem);
   height: 100%;
-  background-color: #b2b2b2;
+  padding: .05rem .25rem;
+  position: relative;
+}
+.playIcon>div{
+  float: left;
+  margin-right: calc((100% - 1.5rem - .88rem * 4)/5 + .88rem/4)
+}
+.playIcon>div:last-child{
+  margin-right: 0;
+}
+
+.playIcon>.I{
+  width: .88rem;
+  height: .88rem;
+  margin-top: calc((3.5rem - 21px - 2.19rem)/2);
+}
+.playI{
+  width: 1rem;
+  height: 1rem;
+  margin-top: calc((25% - 1rem)/2)
 }
