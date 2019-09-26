@@ -1,0 +1,29 @@
+@import "./reset.css";
+body{
+    margin: 0 auto;
+    font-size: 16px;
+}
+.container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  background: url("../img/back2.jpg");
+  background-size: cover;
+}
+.containHead{
+   width: 100%;
+   height: 1rem;
+   background-color: #b2b2b2;
+}
+.songPrev{
+  
+}
+.songTitle{
+
+}
+.songDownLoad{
+
+}

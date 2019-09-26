@@ -104,9 +104,6 @@ function addZero(val) {
         }
     }
 
-
-
-
 }
 
 var Ajax = new Ajax();
