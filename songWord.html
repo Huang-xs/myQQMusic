@@ -10,6 +10,9 @@
 </head>
 
 <body>
+
+    <audio controls src="" preload id="audio"></audio>
+
     <div class="container">
         <div class="containHead clearfix">
             <div class="songIcon songPrev fl">
@@ -20,23 +23,12 @@
                 <img src="./img/downLoad.png" class="auto-img" >
             </div>
         </div>
-        <div class="moveImg"></div>
+        <div class="moveImg">
+            <img src="" class="auto-img" alt="" >
+        </div>
         <div class="mainContent">
               <div class="showWord">
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
-                  <p>dfgsdsdfsgdfgdhfgvghjkgsdfgdhdf</p>
+                 
               </div>
         </div>
         <div class="footContent ">
@@ -47,7 +39,7 @@
             <div class="progress">
                 <div class="progress-active"></div>
                 <div class="mask"></div>
-                <div class="layer"></div>
+                <div class="layer" id="layer"></div>
             </div>
             <div class="tip clearfix">
                 <div class="acthor fl">作者</div>
@@ -63,7 +55,7 @@
                     <img src="./img/i1.png" class="auto-img" >
                 </div>
                 <div class="playI">
-                    <img src="./img/i2.png" class="auto-img" >
+                    <img src="./img/i2.png" class="auto-img"  id="playBtn">
                 </div>
                 <div class="I">
                     <img src="./img/i3.png" class="auto-img" >

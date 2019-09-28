@@ -35,6 +35,9 @@ body{
   font-weight: bolder;
 color: #fff;
 font-size: .48rem;
+white-space: nowrap;
+text-overflow: ellipsis;
+overflow: hidden;
 }
 .moveImg{
   width: 3rem;
@@ -42,7 +45,7 @@ font-size: .48rem;
   border: 1px solid #000;
   border-radius: 50%;
   margin: .2rem auto;
-
+overflow: hidden;
 }
 .mainContent{
   width: 100%;
@@ -52,6 +55,7 @@ font-size: .48rem;
   height: 100%;
   overflow-y: auto;
   text-align: center;
+  color: #fff;
 }
 
 .showWord::-webkit-scrollbar { 
@@ -89,13 +93,13 @@ font-size: .48rem;
 }
 .progress-active{
   background-color: rgb(23, 241, 241);
-  width: 20px;
+  width: 0px;
   height: .06rem;
 }
 .mask{
   position: absolute; 
   top: -.03rem;
-   left: 10px;
+   left: 0px;
   width: .2rem;
   height: .12rem;
   background-color: blue;

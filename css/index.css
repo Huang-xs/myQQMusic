@@ -167,7 +167,6 @@ body,
         width: 100%;
         padding: .15rem .15rem .05rem;
         background-color: #212529;
-        box-shadow: 0 0 12px 0px #fff inset;
     }
     
     .circle {
@@ -176,10 +175,11 @@ body,
         height: .8rem;
         background-color: #ffffff;
         border-radius: 50%;
-        box-shadow: 0 0 6px 1px #000000;
+        box-shadow: 0 0 6px 1px #fff;
         top: -.4rem;
         left: .15rem;
         overflow: hidden;
+        border: 1px solid #ffffff;
     }
     .bar {
         float: right;
@@ -224,7 +224,7 @@ body,
         font-size: .12rem;
         color: #ffffff;
     }
-    .title {
+    .title , .author {
         width: 1.5rem;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -341,13 +341,16 @@ body,
         margin-right: 10px;
         background-color: #000000;
     }
+    .songListActive{
+           background-color: #ddd;
+    }
     .list>li {
         height: 50px;
         padding: 7.5px 10px;
         border-bottom: 1px solid #ddd;
     }
     .musicName {
-        width: calc(100% - 1.3rem - 10px - .6rem);
+        width: calc(100% - 1.3rem - 10px - .6rem - .2rem);
         font-size: 14px;
     }
     .name{
@@ -363,7 +366,14 @@ body,
         width: .6rem;
         margin-top: .1rem;
         border: 1px solid #212529;
-        margin: auto 0;
+        border-radius: 5px; 
+    }
+    .moreplay{
+        float: left;
+        width: .6rem;
+        margin-top: .1rem;
+        border: 1px solid #212529;
+        border-radius: 5px; 
     }
     .app{
         width: 100%;
@@ -388,9 +398,10 @@ body,
         position: fixed;
         bottom:1rem;
         left: 0;
-        height: .3rem;
-        background-color: rgba(238, 237, 237,.8);
-        font-size: 12px;
+        height: .4rem;
+        background-color: rgb(35, 39, 43);
+        font-size: 14px;
+        color: #ffffff;
     }
     .currentTime{
         margin-left: 1.25rem;

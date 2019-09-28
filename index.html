@@ -18,6 +18,7 @@
 -->
 
 <body>
+    <audio src="https://music.163.com/song/media/outer/url?id=1348066360" class="audio" id="audio" preload></audio>
     <div class="main">
         <!-- pc ipad -->
         <header>
@@ -88,8 +89,6 @@
                     <div class="songListcontent clearfix">
                         <div class="lefticon float-left">
                             <img src="./img/line.png" class="auto-img">
-
-
                         </div>
                         <div class="songListTitle float-left">全部</div>
                         <div class="selectclass float-left">
@@ -138,8 +137,7 @@
                     <div class="currentTime float-left" id="currentTime">00:00</div>
                     <div class="duration float-right" id="duration">00:00</div>
                 </div>
-                <audio src="https://music.163.com/song/media/outer/url?id=1348066360" class="audio" id="audio"
-                    preload></audio>
+
                 <!-- 底部播放栏 -->
                 <div class="tabs">
                     <!-- 歌手头像 -->
@@ -202,232 +200,10 @@
     <script src="./js/rem.js"></script>
     <script>
         window.onload = function () {
+
             rem.init();
+            
             Ajax.init();
-
-            // 开始截取的下标
-            var startindex = 0;
-
-            // 结束截取的下标
-            var endindex = 15;
-
-            // 获取滑块的宽度
-            var $mask = $(".mask");
-            var maskwidth = $mask.width();
-
-            //获取未激活进度条宽度
-            var barsWidth = $('.bar').width();
-
-            // 滑块的滑动范围
-            var minLeft = 0;
-            var maxLeft = barsWidth - maskwidth;
-
-            // 存储事件层元素
-            var $layer = $(".layer");
-
-            function move(e) {
-
-                console.log("$layer==>", $layer.width());
-
-                // 触碰屏幕的x坐标
-                var x = e.targetTouches[0].pageX;
-                console.log(x);
-
-
-                // 获取当前元素距离左边的距离
-                var offsetLeft = $(this).offset().left;
-
-                var left = x - offsetLeft - maskwidth / 2;
-
-                left = left >= maxLeft ? maxLeft : left <= minLeft ? minLeft : left;
-
-                console.log("left==>", left);
-
-                $mask.css({
-                    left: left + "px"
-                });
-                // 激活进度条
-
-                var activeWidth = x - offsetLeft;
-                activeWidth = activeWidth >= barsWidth ? barsWidth : activeWidth <= 0 ? 0 : activeWidth;
-                $(".progress-active").css({
-                    width: activeWidth + "px"
-                })
-            }
-
-            var isChange = false;
-
-            // 时间补0
-            function addZero(val) {
-                return val = val < 10 ? "0" + val : val;
-            }
-            // 处理时间
-            function dealTime(time) {
-                var second = addZero(Math.floor(time / 1000 % 60));
-                var minute = addZero(Math.floor(time / 1000 / 60));
-                return minute + ":" + second;
-            }
-
-            // 处理日期格式
-            function dealDate(getTime) {
-                var second = new Date(getTime);
-                return addZero(second.getFullYear()) + "-" + addZero(second.getMonth() + 1) + "-" + addZero(second.getDate())
-            }
-
-
-            $layer.on("touchstart", function (e) {
-                move.call(this, e);
-                isChange = true;
-            })
-
-            $layer.on("touchmove", function (e) {
-                move.call(this, e);
-
-                // 播放时拉动滑块
-
-                var percent = $mask.position().left / maxLeft;
-                var left = percent * duration * 1000;
-
-                $("#currentTime").text(dealTime(left));
-            })
-
-            $layer.on("touchend", function (e) {
-                var percent = $mask.position().left / maxLeft;
-
-                $("#audio")[0].currentTime = percent * duration;
-
-
-                isChange = false;
-            })
-
-            var duration = 0;
-
-
-            // 总时间
-            $("#audio")[0].oncanplay = function () {
-                duration = this.duration;
-
-                // console.log(this.duration);
-
-                $("#duration").text(dealTime(this.duration * 1000));
-            }
-
-            //监听音频实时变化
-            // 当前时间
-            $("#audio")[0].ontimeupdate = function () {
-                if (!isChange) {
-
-                    // 设置进度条上的当前时间
-                    $("#currentTime").text(dealTime(this.currentTime * 1000));
-
-                    // 设置进度条的实时变化的百分比
-                    var percent = this.currentTime / duration;
-
-
-                    // 滑块的实时变化
-                    $mask.css({
-                        left: percent * maxLeft + "px"
-                    })
-
-                    // 激活进度层的宽度
-                    $(".progress-active").css({
-                        width: percent * maxLeft + maskwidth / 2 + "px"
-                    })
-                    console.log($mask.position().left);
-
-                }
-            }
-
-            // 播放完成
-            $("#audio")[0].onended = function () {
-                $("#playBtn>img").attr("src", "./img/i2.png")
-            }
-            //详情
-            var songObj = {};
-            var songArr = [];
-            var songListDetail = localStorage.Detail;
-            songListDetail = songListDetail == undefined ? songObj : songListDetail;
-
-            // 获取所有的li
-            var getLi = 0;
-
-            $(".list>li>.more").on("click", function () {
-                var id = this.dataset.id;
-
-                console.log("获取歌单详情=>", id);
-
-                $.ajax({
-                    type: "get",
-                    isAsync: "true",
-                    url: "http://localhost/playlist/detail?id=" + id,
-                    success: function (data) {
-
-                        //    渲染歌单描述
-                        var str = `<div class="songListImg fl">
-                            <img src="${data.playlist.coverImgUrl}" alt="" class="auto-img">
-                            </div>
-                            <div class="descriptionContent fl">
-                                <div class="songName">歌单名：${data.playlist.name}</div>
-                                <div class="descriptionInfo">描述：${data.playlist.description == null ? "无" : data.playlist.description}</div>
-                                <div class="songCTime">时间：${dealDate(data.playlist.createTime)}</div>
-                                </div>`;
-
-                        $(".description").html(str);
-
-                        // 渲染歌单音乐列表
-
-                        var musicListNum = data.playlist.tracks.slice(startindex, endindex);
-
-
-                        var frame = document.createDocumentFragment();
-                        for (var i = 0; i < musicListNum.length; i++) {
-
-                            var li = document.createElement("li");
-                            li.className = "clearfix active";
-                            var liStr = `<div class="headImg">
-                                <img src="${musicListNum[i].al.picUrl}"
-                                    alt="" class="auto-img">
-                            </div>
-                            <div class="songlistName">
-                                <div class="DsonglName"> ${musicListNum[i].name}</div>
-                                <div class="songListTime clearfix">
-                                    <div class="fl">${dealTime(musicListNum[i].dt)}</div>
-                                    <div class="downLoadIcon fl">
-                                        <img src="./img/downLoad.png" class="auto-img" alt="" srcset="">
-                                    </div>
-                                    </div>
-                            </div>
-                            
-                            <div class="songListplayTip clearfix">
-                                <i class="i1"></i>
-                                <i class="i2"></i>
-                                <i class="i3"></i>
-                                <i class="i4"></i>
-                            </div>`;
-                            li.innerHTML = liStr;
-                            frame.append(li)
-                        }
-                        $(".Dsonglist").append(frame)
-
-                        // getLi = $("#Dsonglist>li");
-                        $(".Appcontent").slideDown();
-
-                    }
-                })
-                //    歌曲列表的点击事件
-                setTimeout(function () {
-                    console.log($("#Dsonglist>li"));
-                }, 1000)
-            })
-
-
-            // 歌单列表懒加载
-
-
-            // 详情页返回按钮
-            $("#icon1").on("click", function () {
-                $(".Appcontent").slideToggle();
-            })
 
         }
     </script>
