@@ -52,12 +52,34 @@ overflow: hidden;
   height: calc(100% - 1.1rem - 3.5rem - 3.4rem);
 }
 .showWord{
-  height: 100%;
-  overflow-y: auto;
+  position: relative;
   text-align: center;
   color: #fff;
+  height: 100%;
+  overflow-y: auto;
 }
-
+.Words{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+.line{
+  position: relative;
+  top:7px;
+  height: 25px;
+  border: 1px solid #000;
+  box-shadow:2px 2px 10px .5px #000 ;
+}
+.Words>p{
+  height: .8rem;
+  line-height: .8rem;
+  margin: 0;
+}
+.wText{
+  background-color: transparent;
+}
 .showWord::-webkit-scrollbar { 
   width: 0px;
 }

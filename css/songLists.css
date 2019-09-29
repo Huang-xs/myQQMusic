@@ -114,6 +114,7 @@ a{
 .songlistName{
     height: 1.2rem;
     padding-top: 5px;
+    font-weight: bolder;
 }
 .DsonglName{
     width: 5.5rem;
@@ -175,10 +176,10 @@ a{
 }
 @keyframes i3{
     0%{
-        transform: scaleY(.6);
+        transform: scaleY(.9);
     }
     100%{
-        transform: scaleY(.8);
+        transform: scaleY(1);
     }
 }
 @keyframes i4{

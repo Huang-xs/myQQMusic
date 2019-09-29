@@ -191,6 +191,7 @@ Ajax.prototype.init = function () {
 
     $(".list>li>.more").on("click", function () {
         var id = this.dataset.id;
+        // $("footer").hide();
         console.log("获取歌单详情=>", id);
 
         $.ajax({
@@ -218,7 +219,7 @@ Ajax.prototype.init = function () {
 
                 var frame = document.createDocumentFragment();
 
-                if($(".Dsonglist>li").length != 0){
+                if ($(".Dsonglist>li").length != 0) {
                     $(".Dsonglist").children().remove();
                 }
                 for (var i = 0; i < musicListNum.length; i++) {
@@ -242,10 +243,10 @@ Ajax.prototype.init = function () {
                             </div>
                     </div>
                     <div class="songListplayTip clearfix">
-                        <i class="i1"></i>
-                        <i class="i2"></i>
-                        <i class="i3"></i>
-                        <i class="i4"></i>
+                        <i class=""></i>
+                        <i class=""></i>
+                        <i class=""></i>
+                        <i class=""></i>
                     </div>`;
                     li.innerHTML = liStr;
                     frame.append(li)
@@ -283,7 +284,7 @@ Ajax.prototype.init = function () {
                     var id = $(this).data("id");
                     // 获取当前播放的歌曲时间
                     // var currentSongTime = 
-                    location.href = "./songWord.html?img+"+currentSongImg+"&SongName+"+currentSongName+"&author+"+currentSongAuthor+"&duration+"+durationTime+"&id+"+id;
+                    location.href = "./songWord.html?img+" + currentSongImg + "&SongName+" + currentSongName + "&author+" + currentSongAuthor + "&duration+" + durationTime + "&id+" + id;
                 });
             }
         })
@@ -300,7 +301,7 @@ Ajax.prototype.init = function () {
         // 存储当前的图片w父元素
         var ImgSelector = $(this).parent().find(".numImg");
         // 存储当前的图片
-        var initimg = ImgSelector.children().attr("src")
+        var initimg = ImgSelector.children().attr("src");
         // 获取图片的位置
 
         console.log(ImgSelector.offset());
@@ -388,9 +389,10 @@ Ajax.prototype.init = function () {
 
     // 总时间
     $audio.oncanplay = function () {
+        console.log(moreId);
+        
         duration = this.duration;
 
-        // console.log(this.duration);
 
         $("#duration").text(dealTime(this.duration * 1000));
     }
@@ -416,7 +418,6 @@ Ajax.prototype.init = function () {
             $(".progress-active").css({
                 width: percent * maxLeft + maskwidth / 2 + "px"
             })
-            // console.log($mask.position().left);
 
         }
     }
@@ -425,6 +426,7 @@ Ajax.prototype.init = function () {
     $audio.onended = function () {
         $("#playBtn>img").attr("src", "./img/i2.png");
 
+        // 歌曲累加
         songIndex++;
 
         console.log(songIndex);
@@ -448,8 +450,59 @@ Ajax.prototype.init = function () {
         })
     }
 
-    
+    $("#i1").on("click", function () {
 
+        songIndex--;
+
+        $.ajax({
+            type: "get",
+            isAsync: true,
+            url: "http://localhost/playlist/detail?id=" + moreId,
+            success: function (data) {
+                if (songIndex < 0) {
+                    songIndex = data.playlist.tracks.length - 1;
+                }
+                var songId = data.playlist.tracks[songIndex].id;
+                var songName = data.playlist.tracks[songIndex].name;
+                var songActhor = data.playlist.tracks[songIndex].ar[0].name;
+                var url = "https://music.163.com/song/media/outer/url?id=" + songId;
+
+                $("#audio").attr("src", url);
+                $(".title").text(songName);
+                $(".author").text(songActhor);
+                $("#playBtn>img").attr("src", "./img/play.png");
+                isPlay = false;
+                $audio.play();
+            }
+        })
+    })
+
+    $("#i3").on("click", function () {
+
+        songIndex++;
+
+        $.ajax({
+            type: "get",
+            isAsync: true,
+            url: "http://localhost/playlist/detail?id=" + moreId,
+            success: function (data) {
+                if (songIndex > data.playlist.tracks.length-1) {
+                    songIndex = 0;
+                }
+                var songId = data.playlist.tracks[songIndex].id;
+                var songName = data.playlist.tracks[songIndex].name;
+                var songActhor = data.playlist.tracks[songIndex].ar[0].name;
+                var url = "https://music.163.com/song/media/outer/url?id=" + songId;
+
+                $("#audio").attr("src", url);
+                $(".title").text(songName);
+                $(".author").text(songActhor);
+                $("#playBtn>img").attr("src", "./img/play.png");
+                isPlay = false;
+                $audio.play();
+            }
+        })
+    })
 }
 
 var Ajax = new Ajax();

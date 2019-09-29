@@ -411,6 +411,11 @@ body,
         margin-right: .20rem;
         margin-top: -5px;
     }
+    .o3{
+        width: 0.5rem !important;
+        color: #fff;
+        font-size: 12px;
+    }
 }
 /* @media screen and (min-width: 1200px){
 }

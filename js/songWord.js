@@ -51,8 +51,12 @@ window.onload = function () {
         type: "get",
         isAsync: "true",
         success: function (data) {
-            // console.log(data.lrc.lyric);
+            console.log(data.lrc);
 
+            if (data.lrc == undefined) {
+                $(".Words").text("暂时没有歌词");
+                return;
+            }
             var lyric = data.lrc.lyric.split(/[\n\r]+/);
 
             for (var v of lyric) {
@@ -60,12 +64,10 @@ window.onload = function () {
                 var second = v.split("]")[0].slice(1).split(":");
                 var time = Number(second[0]) * 60 + Number(second[1]);
                 if (lrc) {
-                    var P = $("<p data-time=" + time + ">" + lrc + "</p>");
-                    $(".showWord").append(P);
+                    var P = $("<p data-time=" + time + "><span class='wText'>" + lrc + "</span></p>");
+                    $(".Words").append(P);
                 }
-
             }
-
         }
     })
     //==================================== 获取当前音频
@@ -110,12 +112,13 @@ window.onload = function () {
     }
     // 获取当前当前音频的播放时间
 
-    
-    
-    $audio.ontimeupdate = function () {
-        var $p = $(".showWord>p");
 
-        var wordHeight = parseFloat($p.css("top"));
+    var wordHeight = parseFloat($(".showWord>.Words").css("top"));
+
+    $audio.ontimeupdate = function () {
+        var $p = $(".showWord>.Words>p");
+        // console.log($p.);
+
         var height = $p.height();
         var currentTime = this.currentTime;
         // console.log(currentTime);
@@ -133,26 +136,28 @@ window.onload = function () {
             width: percent * maxLeft + "px"
         })
 
-      
+
         // 歌词移动
-        
+
         for (var i = 0; i < $p.length; i++) {
             //    获取当前的p和下一个p
             var currentPTime = $p.eq(i).data("time");
             var prevPTime = $p.eq(i + 1).data("time");
 
-            console.log(prevPTime);
             if (i + 1 == $p.length) {
                 prevPTime = Number.MAX_VALUE;
             }
-            if(this.currentTime >= currentPTime && this.currentTime < prevPTime){
+            console.log(prevPTime);
+
+            if (this.currentTime >= currentPTime && this.currentTime < prevPTime) {
                 console.log("4444====================");
-                console.log(-wordHeight - height * i);
-                
-                  $(".showWord").animate({
-                      marginTop : -wordHeight - height * i  + "px"
-                  },150);
+                console.log(wordHeight);
+
+                $(".Words").animate({
+                    marginTop: wordHeight - height * i + "px"
+                }, 150);
             }
+
 
         }
     }
